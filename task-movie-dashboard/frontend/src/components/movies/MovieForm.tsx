@@ -23,7 +23,7 @@ const schema = yup.object({
       new Date().getFullYear(),
       `Year must not exceed ${new Date().getFullYear()}`
     ),
-  poster: yup.string().nullable().notRequired()
+  poster: yup.string().required("Publishing year is required"),
 });
 
 type FormData = yup.InferType<typeof schema>;

@@ -20,7 +20,7 @@ const schema = yup.object({
     .min(1800, "Year must be at least 1800")
     .max(new Date().getFullYear(), "Year cannot be in the future")
     .required("Publishing year is required"),
-  poster: yup.string().optional(),
+  poster: yup.string().required("Publishing year is required"),
 });
 
 type FormData = yup.InferType<typeof schema>;

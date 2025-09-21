@@ -130,7 +130,7 @@ export default function MovieList() {
         title="Your movie list is empty"
         description="Start building your movie collection by adding your first movie"
         actionText="Add a new movie"
-        onAction={() => setShowForm(true)}
+        onAction={() => router.push("/movies/create")} 
       />
     );
   }
