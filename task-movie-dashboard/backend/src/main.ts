@@ -2,6 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { config } from 'dotenv';
+
+// Load environment variables
+config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +15,8 @@ async function bootstrap() {
     origin: [
       process.env.FRONTEND_URL || 'http://localhost:3000',
       'http://localhost:3002', // Add port 3002 for development
+      'https://movie.pgkonnect.me', // Production frontend URL
+      'https://movie-api.pgkonnect.me', // Production API URL (if needed)
     ],
     credentials: true,
   });

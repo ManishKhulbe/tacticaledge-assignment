@@ -68,7 +68,6 @@ export default function RegisterForm() {
           alt="Wave background"
           fill
           className="w-full h-auto"
-          style={{ height: "111px" }}
         />
       </div>
 
