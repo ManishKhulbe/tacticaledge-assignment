@@ -31,6 +31,35 @@
 $ npm install
 ```
 
+## Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+# Database
+DB_TYPE=sqlite
+DB_DATABASE=database.sqlite
+
+# JWT
+JWT_SECRET=your-jwt-secret-key
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+```
+
+### Cloudinary Setup
+
+1. Sign up for a free account at [Cloudinary](https://cloudinary.com)
+2. Go to your dashboard and copy the following values:
+   - Cloud Name
+   - API Key
+   - API Secret
+3. Add these values to your `.env` file
+
+The application uses Cloudinary for image uploads instead of local storage. Images are automatically optimized and stored in the cloud.
+
 ## Compile and run the project
 
 ```bash

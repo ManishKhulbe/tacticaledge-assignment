@@ -16,7 +16,7 @@ import {
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { UploadService } from './upload.service';
-import { diskStorage } from 'multer';
+import { memoryStorage } from 'multer';
 
 @ApiTags('upload')
 @Controller('upload')
@@ -28,16 +28,7 @@ export class UploadController {
   @Post('poster')
   @UseInterceptors(
     FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, callback) => {
-          const uploadService = new UploadService();
-          const filename = uploadService.generateFileName(
-            file.originalname || 'unknown',
-          );
-          callback(null, filename);
-        },
-      }),
+      storage: memoryStorage(),
       fileFilter: (req, file, callback) => {
         if (file.mimetype.match(/\/(jpg|jpeg|png|gif)$/)) {
           callback(null, true);
@@ -50,18 +41,20 @@ export class UploadController {
       },
     }),
   )
-  @ApiOperation({ summary: 'Upload movie poster' })
+  @ApiOperation({ summary: 'Upload movie poster to Cloudinary' })
   @ApiConsumes('multipart/form-data')
-  @ApiResponse({ status: 201, description: 'File uploaded successfully' })
+  @ApiResponse({
+    status: 201,
+    description: 'File uploaded successfully to Cloudinary',
+  })
   async uploadPoster(@UploadedFile() file: Express.Multer.File) {
     if (!file) {
       throw new Error('No file uploaded');
     }
 
-    const fileUrl = this.uploadService.getFileUrl(file.filename);
+    const cloudinaryUrl = await this.uploadService.uploadToCloudinary(file);
     return {
-      filename: file.filename,
-      url: fileUrl,
+      url: cloudinaryUrl,
       originalName: file.originalname,
       size: file.size,
     };

@@ -60,9 +60,8 @@ export default function CreateMovieForm() {
     setUploading(true);
     try {
       const response = await uploadApi.uploadPoster(file);
-      const imageUrl = `${
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"
-      }${response.data.url}`;
+      // Cloudinary returns the full URL directly
+      const imageUrl = response.data.url;
       setUploadedImage(imageUrl);
       setValue("poster", imageUrl);
       safeToast.success("Image uploaded successfully");
