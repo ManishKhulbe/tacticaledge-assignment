@@ -9,7 +9,7 @@ import {
 } from "@/store/slices/moviesSlice";
 import { Movie } from "@/types";
 import MovieCard from "./MovieCard";
-import { ChevronLeft, ChevronRight, LogOut, Film } from "lucide-react";
+import { ChevronLeft, ChevronRight, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { safeToast } from "@/utils/toast";
 import EmptyState from "../ui/EmptyState";

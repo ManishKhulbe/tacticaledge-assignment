@@ -9,6 +9,7 @@ import { register as registerUser } from "@/store/slices/authSlice";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff, Mail, Lock } from "lucide-react";
 import { safeToast } from "@/utils/toast";
+import Image from "next/image";
 
 const schema = yup.object({
   email: yup
@@ -62,9 +63,10 @@ export default function RegisterForm() {
     <div className="min-h-screen flex items-center justify-center bg-[#093545] relative overflow-hidden">
       {/* Background waves */}
       <div className="absolute bottom-0 left-0 right-0">
-        <img
+        <Image
           src="/Vectors.svg"
           alt="Wave background"
+          fill
           className="w-full h-auto"
           style={{ height: "111px" }}
         />

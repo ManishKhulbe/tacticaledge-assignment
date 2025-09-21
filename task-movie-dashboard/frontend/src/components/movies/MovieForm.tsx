@@ -6,8 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Movie, CreateMovieRequest, UpdateMovieRequest } from "@/types";
 import { uploadApi } from "@/lib/api";
-import { X, Upload, Image as ImageIcon } from "lucide-react";
+import { X, Upload } from "lucide-react";
 import { safeToast } from "@/utils/toast";
+import Image from "next/image";
 
 const schema = yup.object({
   title: yup
@@ -22,7 +23,7 @@ const schema = yup.object({
       new Date().getFullYear(),
       `Year must not exceed ${new Date().getFullYear()}`
     ),
-  poster: yup.string().required("Poster is required"),
+  poster: yup.string().nullable().notRequired()
 });
 
 type FormData = yup.InferType<typeof schema>;
@@ -47,7 +48,6 @@ export default function MovieForm({
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm<FormData>({
     resolver: yupResolver(schema),
@@ -144,9 +144,10 @@ export default function MovieForm({
                 <div className="border-2 border-dashed border-white rounded-lg p-8 text-center hover:border-gray-300 transition-colors min-h-[300px] flex flex-col items-center justify-center">
                   {uploadedImage ? (
                     <div className="relative w-full h-full">
-                      <img
+                      <Image
                         src={uploadedImage}
                         alt="Movie poster"
+                        fill
                         className="w-full h-full object-cover rounded-lg"
                       />
                       <button
