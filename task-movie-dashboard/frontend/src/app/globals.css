@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+:root {
+  --background: #093545;
+  --input: #224957;
+  --card: #092c39;
+  --error: #eb5757;
+  --primary: #2bd17e;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-input: var(--input);
+  --color-card: var(--card);
+  --color-error: var(--error);
+  --color-primary: var(--primary);
+  --font-sans: var(--font-montserrat);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+}
